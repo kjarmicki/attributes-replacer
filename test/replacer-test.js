@@ -8,7 +8,7 @@ describe('A replacer', () => {
 
     beforeEach(sandbox.refresh);
 
-    it('should do stuff', () => {
+    it("should replace element's attributes according to regexp", () => {
         // given
         sandbox.insert(`
                 <a href="http://hello-world.com">Hello World!</a>
