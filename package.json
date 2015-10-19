@@ -1,0 +1,26 @@
+{
+  "name": "attr-replacer",
+  "version": "1.0.0",
+  "description": "Chrome extension allowing for easy replacement of HTML attribute values (like anchro hrefs etc.)",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start"
+  },
+  "keywords": [
+    "link",
+    "url",
+    "replacer"
+  ],
+  "author": "Krystian Jarmicki",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^2.3.3",
+    "browserify": "^11.2.0",
+    "karma": "^0.13.11",
+    "karma-browserify": "^4.4.0",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-mocha": "^0.2.0"
+  },
+  "dependencies": {
+  }
+}

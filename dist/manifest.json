@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "activeTab",
+        "https://ajax.googleapis.com/"
+    ],
+    "name": "attr-replacer",
+    "description": "Chrome extension allowing for easy replacement of HTML attribute values (like anchro hrefs etc.)",
+    "version": "1.0.0"
+}
