@@ -18,5 +18,9 @@ module.exports = {
     },
     getHTML: function() {
         return element.innerHTML;
+    },
+    find: function(selector) {
+        let found = document.querySelectorAll(selector);
+        return found.length === 1 ? found[0] : found;
     }
 };

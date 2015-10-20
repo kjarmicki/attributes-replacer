@@ -4,24 +4,17 @@
 
 'use strict';
 
-let extractAttributeFromSelector = function(selector) {
-    try {
-        return selector.match(/\[([a-z]+)\]/)[1];
-    }
-    catch(e) {
-        console && console.error('Error while parsing attribute from selector '  + selector);
-    }
-};
+let utils = require('./utils');
 
 let replace = function(elements, attributeName, rules) {
     elements.forEach(element => {
-        let attr = element.getAttribute(attributeName);
-        if(attr) {
+        let attributeValue = element.getAttribute(attributeName);
+        if(attributeValue) {
             (rules || []).some(rule => {
                 let ruleRegexp = new RegExp(rule.regexp);
-                if(attr.match(ruleRegexp)) {
-                    element.setAttribute(attributeName, attr.replace(ruleRegexp, rule.replace));
-
+                if(attributeValue.match(ruleRegexp)) {
+                    element.setAttribute(attributeName, attributeValue.replace(ruleRegexp, rule.replace));
+                    element[`__original_attribute_${attributeName}__`] = attributeValue;
                     return true;
                 }
             })
@@ -31,7 +24,7 @@ let replace = function(elements, attributeName, rules) {
 
 let replaceBySelector = function(selector, rules) {
     let elements = [].slice.call(document.querySelectorAll(selector));
-    let attributeName = extractAttributeFromSelector(selector);
+    let attributeName = utils.extractAttributeFromSelector(selector);
 
     return replace(elements, attributeName, rules);
 };
