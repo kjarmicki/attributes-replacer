@@ -16,6 +16,9 @@ module.exports = {
     insert: function(html) {
         element.innerHTML = html;
     },
+    append: function(html) {
+        element.innerHTML += html;
+    },
     getHTML: function() {
         return element.innerHTML;
     },

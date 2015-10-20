@@ -17,7 +17,7 @@ let replace = function(elements, attributeName, rules) {
                     element[`__original_attribute_${attributeName}__`] = attributeValue;
                     return true;
                 }
-            })
+            });
         }
     });
 };
