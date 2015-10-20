@@ -16,7 +16,7 @@ describe('A replacer', () => {
         `);
 
         // when
-        replacer.replaceBySelector('a[href]', [{
+        replacer.replaceBySelectors(['a[href]'], [{
             regexp: '^http://hello-world.com', replace: 'http://goodbye-cruel-world.com'
         }]);
 
@@ -36,7 +36,7 @@ describe('A replacer', () => {
         `);
 
         // when
-        replacer.replaceBySelector('a[href]', [{
+        replacer.replaceBySelectors(['a[href]'], [{
             regexp: '^http://hello-world.com', replace: 'http://goodbye-cruel-world.com'
         }]);
         let first = sandbox.find('#first');

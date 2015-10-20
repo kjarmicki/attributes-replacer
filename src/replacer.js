@@ -22,14 +22,19 @@ let replace = function(elements, attributeName, rules) {
     });
 };
 
-let replaceBySelector = function(selector, rules) {
-    let elements = [].slice.call(document.querySelectorAll(selector));
-    let attributeName = utils.extractAttributeFromSelector(selector);
-
-    return replace(elements, attributeName, rules);
+let replaceBySelectors = function(selectors, rules) {
+    selectors
+        .reduce((replacements, selector) => {
+            replacements.push({
+                elements: [].slice.call(document.querySelectorAll(selector)),
+                attributeName: utils.extractAttributeFromSelector(selector)
+            });
+            return replacements;
+        }, [])
+        .forEach(replacement => replace(replacement.elements, replacement.attributeName, rules));
 };
 
 module.exports = {
     replace: replace,
-    replaceBySelector: replaceBySelector
+    replaceBySelectors: replaceBySelectors
 };
