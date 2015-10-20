@@ -19,7 +19,7 @@ describe('A reverter', () => {
         sandbox.find('#first').__original_attribute_href__ = 'http://goodbye-cruel-world.com';
         sandbox.find('#second').__original_attribute_href__ = 'http://goodbye-cruel-world.com/about';
 
-        reverter.revertBySelector('a[href]');
+        reverter.revertBySelectors(['a[href]']);
 
         // then
         assert.equal(sandbox.getHTML().trim(), `
