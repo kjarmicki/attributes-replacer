@@ -14,15 +14,6 @@ const mutationObserver = new MutationObserver(mutations => {
     }
 });
 
-let observeBySelector = function(selector, action) {
-    mutationHandler = function(elements) {
-        action(elements.filter(element =>
-            element.nodeType === Node.ELEMENT_NODE && element.matches(selector))
-        );
-    };
-    resume();
-};
-
 let pause = function() {
     mutationObserver.disconnect();
 };
@@ -34,8 +25,26 @@ let resume = function() {
     });
 };
 
+let observeBySelectors = function(selectors, action) {
+    mutationHandler = function(candidates) {
+        candidates = candidates.filter(element => element.nodeType === Node.ELEMENT_NODE);
+
+        let elements = [];
+        selectors.forEach(selector => {
+            candidates.forEach(candidate => {
+                if(candidate.matches(selector)) {
+                    elements.push(candidate);
+                }
+            });
+        });
+
+        action(elements);
+    };
+    resume();
+};
+
 module.exports = {
-    observeBySelector: observeBySelector,
+    observeBySelectors: observeBySelectors,
     pause: pause,
     resume: resume
 };
