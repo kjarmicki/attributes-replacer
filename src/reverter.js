@@ -23,6 +23,5 @@ let revertBySelectors = function(selectors) {
 };
 
 module.exports = {
-    revert: revert,
     revertBySelectors: revertBySelectors
 };

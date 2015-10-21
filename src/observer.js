@@ -1,16 +1,17 @@
 'use strict';
 
-let mutationHandler;
+let action;
 
 const mutationObserver = new MutationObserver(mutations => {
-    if(typeof mutationHandler === 'function') {
+    if(typeof action === 'function') {
         let nestedElements = mutations
             .filter(mutation => mutation.type === 'childList')
             .map(mutation => [].slice.call(mutation.addedNodes));
 
-        let elements = [].concat.apply([], nestedElements);
+        let elements = [].concat.apply([], nestedElements)
+            .filter(element => element.nodeType === Node.ELEMENT_NODE);
 
-        mutationHandler(elements);
+        action(elements);
     }
 });
 
@@ -25,26 +26,13 @@ let resume = function() {
     });
 };
 
-let observeBySelectors = function(selectors, action) {
-    mutationHandler = function(candidates) {
-        candidates = candidates.filter(element => element.nodeType === Node.ELEMENT_NODE);
-
-        let elements = [];
-        selectors.forEach(selector => {
-            candidates.forEach(candidate => {
-                if(candidate.matches(selector)) {
-                    elements.push(candidate);
-                }
-            });
-        });
-
-        action(elements);
-    };
+let observe = function(callback) {
+    if(callback) action = callback;
     resume();
 };
 
 module.exports = {
-    observeBySelectors: observeBySelectors,
+    observe: observe,
     pause: pause,
     resume: resume
 };

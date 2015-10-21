@@ -22,11 +22,12 @@ let replace = function(elements, attributeName, rules) {
     });
 };
 
-let replaceBySelectors = function(selectors, rules) {
+let replaceBySelectors = function(selectors, rules, subtree) {
+    subtree = subtree || document;
     selectors
         .reduce((replacements, selector) => {
             replacements.push({
-                elements: [].slice.call(document.querySelectorAll(selector)),
+                elements: [].slice.call(subtree.querySelectorAll(selector)),
                 attributeName: utils.extractAttributeFromSelector(selector)
             });
             return replacements;
@@ -35,6 +36,5 @@ let replaceBySelectors = function(selectors, rules) {
 };
 
 module.exports = {
-    replace: replace,
     replaceBySelectors: replaceBySelectors
 };

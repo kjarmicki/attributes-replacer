@@ -15,7 +15,7 @@ describe('An observer', () => {
                 <a href="http://hello-world.com/about">About Hello World!</a>
         `);
 
-        observer.observeBySelectors(['a[href]'], nodes => {
+        observer.observe(nodes => {
             nodes.forEach(node => node.visited = true);
         });
 
@@ -40,7 +40,7 @@ describe('An observer', () => {
                 <a href="http://hello-world.com/about">About Hello World!</a>
         `);
 
-        observer.observeBySelectors(['a[href]'], nodes => {
+        observer.observe(nodes => {
             nodes.forEach(node => node.visited = true);
         });
 
@@ -66,7 +66,7 @@ describe('An observer', () => {
                 <a href="http://hello-world.com/about">About Hello World!</a>
         `);
 
-        observer.observeBySelectors(['a[href]'], nodes => {
+        observer.observe(nodes => {
             nodes.forEach(node => node.visited = true);
         });
 
