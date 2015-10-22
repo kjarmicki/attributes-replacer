@@ -3,6 +3,7 @@
 let assert = require('assert');
 let contentScript = require('../src/content-script.js');
 let sandbox = require('./utils/sandbox');
+let queue = require('./utils/queue');
 
 describe('A content script', () => {
 
@@ -15,14 +16,18 @@ describe('A content script', () => {
         `);
 
         // when
-        window.postMessage({
-            from: 'attr-replacer',
-            action: 'on',
-            args: [['div[attr]'], [{regexp: 'xxx', replace: 'yyy'}]]
-        }, '*');
+        let q = queue();
+        q.add(() => {
+            window.postMessage({
+                from: 'attr-replacer',
+                action: 'on',
+                args: [['div[attr]'], [{regexp: 'xxx', replace: 'yyy'}]]
+            }, '*');
+        }, 100);
+
 
         // then
-        setTimeout(() => {
+        q.add(() => {
             assert.equal(sandbox.getHTML().trim(), `
                 <div attr="yyy"></div>
             `.trim());
@@ -33,9 +38,11 @@ describe('A content script', () => {
                 action: 'off',
                 args: [['div[attr]'], []]
             }, '*');
+        }, 20);
 
-            setTimeout(done, 20);
-        }, 100);
+        q.add(done);
+
+        q.run();
     });
 
 });
