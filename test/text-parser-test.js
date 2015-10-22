@@ -2,7 +2,6 @@
 
 let assert = require('assert');
 let parser = require('../src/text-parser.js');
-let sandbox = require('./utils/sandbox');
 
 describe('A text parser', () => {
 
