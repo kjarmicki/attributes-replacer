@@ -2,7 +2,8 @@
 
 let replacer = require('./replacer'),
     reverter = require('./reverter'),
-    observer = require('./observer');
+    observer = require('./observer'),
+    messenger = require('./messenger');
 
 let controls = {
     on: function (selectors, rules) {
@@ -18,11 +19,8 @@ let controls = {
     }
 };
 
-window.addEventListener('message', event => {
-    if(event.source !== window) return;
-
-    let data = event.data;
-    if(data.from && data.from === 'attr-replacer') {
+messenger.listen(data => {
+    if(typeof controls[data.action] === 'function') {
         controls[data.action].apply(controls, data.args);
     }
 });
