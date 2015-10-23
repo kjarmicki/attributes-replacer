@@ -12,12 +12,13 @@ let create = function(overrides) {
         'manifest_version': 2,
 
         'browser_action': {
-            'default_icon': 'icon.png'
+            'default_icon': 'temp-icon.png',
+            'default_popup': 'popup.html'
         },
-        content_scripts: {
-            matches: ['*'],
-            js: ['content.js']
-        }
+        content_scripts: [{
+            matches: ['<all_urls>'],
+            js: ['content-script.js']
+        }]
     }, overrides);
 };
 
