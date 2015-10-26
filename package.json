@@ -4,7 +4,16 @@
   "description": "Chrome extension allowing for easy replacement of HTML attribute values (like anchor hrefs etc.)",
   "main": "index.js",
   "scripts": {
-    "test": "karma start"
+    "test": "karma start",
+
+    "manifest": "node index.js",
+    "contentscript": "browserify src/content-script.js -o dist/content-script.js",
+    "popup": "browserify src/popup.js -o dist/popup.js && cp assets/popup.html dist/.",
+    "background": "browserify src/background.js -o dist/background.js",
+    "icon": "cp assets/temp-icon.png dist/.",
+
+    "make": "npm run manifest && npm run contentscript && npm run popup && npm run background && npm run icon",
+    "start": "npm run make"
   },
   "keywords": [
     "link",

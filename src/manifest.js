@@ -9,16 +9,19 @@ let fs = require('fs');
 
 let create = function(overrides) {
     return Object.assign({
-        'manifest_version': 2,
+        manifest_version: 2,
 
-        'browser_action': {
-            'default_icon': 'temp-icon.png',
-            'default_popup': 'popup.html'
+        browser_action: {
+            default_icon: 'temp-icon.png',
+            default_popup: 'popup.html'
         },
         content_scripts: [{
             matches: ['<all_urls>'],
             js: ['content-script.js']
-        }]
+        }],
+        background: {
+            scripts: ['background.js']
+        }
     }, overrides);
 };
 

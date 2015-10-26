@@ -19,8 +19,8 @@ let controls = {
     }
 };
 
-messenger.listen(data => {
-    if(typeof controls[data.action] === 'function') {
-        controls[data.action].apply(controls, data.args);
-    }
-});
+//messenger.listenToExtension(data => {
+//    if(typeof controls[data.action] === 'function') {
+//        controls[data.action].apply(controls, data.args);
+//    }
+//});
