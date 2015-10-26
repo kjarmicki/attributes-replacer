@@ -9,8 +9,27 @@ let textParser = require('./text-parser'),
     switchElement = document.querySelector('#switch');
 
 switchElement && switchElement.addEventListener('change', event => {
-    let rules = rulesParser.parse(rulesElement.value);
     let selectors = textParser.parse(selectorsElement.value);
+
+    if(switchElement.value === 'on') {
+        let rules = rulesParser.parse(rulesElement.value);
+        messenger.sendToTab('content-script', {
+            action: 'on',
+            args: {
+                rules: rules,
+                selectors: selectors
+            }
+        });
+    }
+
+    if(switchElement.value === 'off') {
+        messenger.sendToTab('content-script', {
+            action: 'on',
+            args: {
+                selectors: selectors
+            }
+        });
+    }
 });
 
 rulesElement && rulesElement.addEventListener('change', event => {
@@ -29,7 +48,7 @@ selectorsElement && selectorsElement.addEventListener('change', event => {
     });
 });
 
-messenger.listenToExtension('popup', message => {
+messenger.listen('popup', message => {
     if(message.action === 'load') {
         if(message.key === 'selectors') {
             selectorsElement.value = message.value;

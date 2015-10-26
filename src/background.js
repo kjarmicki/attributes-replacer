@@ -11,7 +11,7 @@ let background = {
     }
 };
 
-messenger.listenToExtension('background', message => {
+messenger.listen('background', message => {
     if(message.action === 'save') {
         background.save(message.key, message.value);
     }

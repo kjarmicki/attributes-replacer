@@ -6,21 +6,21 @@ let replacer = require('./replacer'),
     messenger = require('./messenger');
 
 let controls = {
-    on: function (selectors, rules) {
-        replacer.replaceBySelectors(selectors, rules);
+    on: function(args) {
+        replacer.replaceBySelectors(args.selectors, args.rules);
         observer.observe(changedSubtree => {
-            replacer.replaceBySelectors(selectors, rules, changedSubtree);
+            replacer.replaceBySelectors(args.selectors, args.rules, changedSubtree);
         });
     },
 
-    off: function (selectors) {
-        reverter.revertBySelectors(selectors);
+    off: function(args) {
+        reverter.revertBySelectors(args.selectors);
         observer.pause();
     }
 };
 
-//messenger.listenToExtension(data => {
-//    if(typeof controls[data.action] === 'function') {
-//        controls[data.action].apply(controls, data.args);
-//    }
-//});
+messenger.listen('content-script', message => {
+    if(typeof controls[message.action] === 'function') {
+        controls[message.action].call(controls, message.args);
+    }
+});
