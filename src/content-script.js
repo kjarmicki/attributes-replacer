@@ -8,11 +8,12 @@ let replacer = require('./replacer'),
 let controls = {
     on: function(args) {
         replacer.replaceBySelectors(args.selectors, args.rules);
-        observer.observe(changedSubtree => {
-            replacer.replaceBySelectors(args.selectors, args.rules, changedSubtree);
+        observer.observe(changedNodes => {
+            changedNodes.forEach(subtree => {
+                replacer.replaceBySelectors(args.selectors, args.rules, subtree);
+            });
         });
     },
-
     off: function(args) {
         reverter.revertBySelectors(args.selectors);
         observer.pause();
@@ -23,4 +24,8 @@ messenger.listen('content-script', message => {
     if(typeof controls[message.action] === 'function') {
         controls[message.action].call(controls, message.args);
     }
+});
+
+messenger.sendToExtension('background', {
+    action: 'init'
 });

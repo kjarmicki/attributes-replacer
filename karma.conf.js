@@ -15,7 +15,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/*.js',
+      'src/observer.js',
+      'src/replacer.js',
+      'src/reverter.js',
+      'src/rules-parser.js',
+      'src/text-parser.js',
       'test/*.js'
     ],
 
