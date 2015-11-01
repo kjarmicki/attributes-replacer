@@ -8,7 +8,7 @@ let parse = function(text) {
         .map(line => line.split('=>').map(property => property.trim()))
         .map(properties => {
             return {
-                regexp: properties[0], replace: properties[1]
+                regexp: new RegExp(properties[0]), replace: properties[1]
             };
         });
 };

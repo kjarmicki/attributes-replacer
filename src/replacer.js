@@ -11,9 +11,8 @@ let replace = function(elements, attributeName, rules) {
         let attributeValue = element.getAttribute(attributeName);
         if(attributeValue) {
             (rules || []).some(rule => {
-                let ruleRegexp = new RegExp(rule.regexp);
-                if(attributeValue.match(ruleRegexp)) {
-                    element.setAttribute(attributeName, attributeValue.replace(ruleRegexp, rule.replace));
+                if(attributeValue.match(rule.regexp)) {
+                    element.setAttribute(attributeName, attributeValue.replace(rule.regexp, rule.replace));
                     element[`__original_attribute_${attributeName}__`] = attributeValue;
                     return true;
                 }
