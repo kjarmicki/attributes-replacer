@@ -8,6 +8,32 @@ describe('A replacer', () => {
 
     beforeEach(sandbox.refresh);
 
+    it("should replace string contents based on regexp", () => {
+        // given
+        let hello = 'hello world';
+
+        // when
+        let replaced = replacer.replaceString(hello, [{
+            regexp: new RegExp('hello'), replace: 'goodbye cruel'
+        }]);
+
+        // then
+        assert.equal(replaced, 'goodbye cruel world');
+    });
+
+    it("should leave string as is when it doesn't match any regexp", () => {
+        // given
+        let hello = 'hello world';
+
+        // when
+        let replaced = replacer.replaceString(hello, [{
+            regexp: new RegExp('bye'), replace: 'goodbye cruel'
+        }]);
+
+        // then
+        assert.equal(replaced, hello);
+    });
+
     it("should replace element's attributes according to regexp", () => {
         // given
         sandbox.insert(`

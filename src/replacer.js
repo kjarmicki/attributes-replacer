@@ -21,6 +21,15 @@ let replace = function(elements, attributeName, rules) {
     });
 };
 
+let replaceString = function(toReplace, rules) {
+    let matchedRule = rules.filter(rule => toReplace.match(rule.regexp))[0];
+
+    if(matchedRule) {
+        return toReplace.replace(matchedRule.regexp, matchedRule.replace);
+    }
+    return toReplace;
+};
+
 let replaceBySelectors = function(selectors, rules, subtree) {
     subtree = subtree || document;
     selectors
@@ -35,5 +44,6 @@ let replaceBySelectors = function(selectors, rules, subtree) {
 };
 
 module.exports = {
+    replaceString: replaceString,
     replaceBySelectors: replaceBySelectors
 };
