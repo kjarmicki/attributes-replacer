@@ -4,7 +4,8 @@ let messenger = require('./messenger'),
 
     rulesElement = document.querySelector('#rules'),
     selectorsElement = document.querySelector('#selectors'),
-    switchElement = document.querySelector('#switch');
+    switchElement = document.querySelector('#switch'),
+    urlElement = document.querySelector('#url');
 
 let switchOn = function() {
     messenger.sendToExtension('background', {
@@ -47,7 +48,7 @@ let loadValueAsync = function(key) {
 };
 
 // main logic
-switchElement && switchElement.addEventListener('change', event => {
+switchElement.addEventListener('change', event => {
     if(switchElement.checked) {
         switchOn();
         disableTextFields();
@@ -62,16 +63,22 @@ switchElement && switchElement.addEventListener('change', event => {
 // initialization/persistence stuff
 
 // persist element values when they change
-rulesElement && rulesElement.addEventListener('change', event => {
+rulesElement.addEventListener('change', event => {
     persistValueAsync('rules', rulesElement.value);
 });
 
-selectorsElement && selectorsElement.addEventListener('change', event => {
+selectorsElement.addEventListener('change', event => {
     persistValueAsync('selectors', selectorsElement.value);
 });
 
-switchElement && switchElement.addEventListener('change', event => {
+switchElement.addEventListener('change', event => {
     persistValueAsync('switch', switchElement.checked.toString());
+});
+
+urlElement.addEventListener('click', event => {
+    messenger.sendToExtension('background', {
+        action: 'url'
+    });
 });
 
 // request selectors from storage upon page open

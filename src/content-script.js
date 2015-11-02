@@ -17,6 +17,14 @@ let controls = {
     off: function(args) {
         reverter.revertBySelectors(args.selectors);
         observer.pause();
+    },
+    url: function(args) {
+        let current = window.location.href,
+            replaced = replacer.replaceString(current, args.rules);
+
+        if(current !== replaced) {
+            window.location.href = replaced;
+        }
     }
 };
 

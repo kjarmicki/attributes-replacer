@@ -34,6 +34,15 @@ let background = {
     init: function() {
         let turnedOn = (background.load('switch') === 'true');
         if(turnedOn) background.on();
+    },
+    url: function() {
+        let rawRules = background.load('rules');
+        messenger.sendToTab('content-script', {
+            action: 'url',
+            args: {
+                rules: rulesParser.parse(rawRules)
+            }
+        });
     }
 };
 
