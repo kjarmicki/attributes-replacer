@@ -43,7 +43,7 @@ describe('A replacer', () => {
 
         // when
         replacer.replaceBySelectors(['a[href]'], [{
-            regexp: new RegExp('^http://hello-world.com'), replace: 'http://goodbye-cruel-world.com'
+            regexp: '^http://hello-world.com', replace: 'http://goodbye-cruel-world.com'
         }]);
 
         // then

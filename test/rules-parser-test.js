@@ -14,9 +14,10 @@ describe('A rules parser', () => {
         let parsed = parser.parse(text);
 
         // then
-        assert.equal(parsed[0].regexp.source, 'one');
-        assert.equal(parsed[0].replace, 'two');
-        assert.equal(parsed[1].regexp.source, 'three');
-        assert.equal(parsed[1].replace, 'four');
+        assert.deepEqual(parsed, [{
+            regexp: 'one', replace: 'two'
+        }, {
+            regexp: 'three', replace: 'four'
+        }]);
     });
 });
