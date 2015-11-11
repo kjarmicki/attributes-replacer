@@ -146,13 +146,13 @@ input[type="checkbox"].switch + div:hover:after {
     cursor: text;
 }
 
-.CodeMirror-lines {
-    cursor: default;
-}
-
 .CodeMirror.cm-s-disabled {
     -webkit-filter: grayscale(1);
     background-color: #fcfcfc;
+    cursor: default;
+}
+
+.CodeMirror.cm-s-disabled .CodeMirror-lines {
     cursor: default;
 }
 
