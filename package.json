@@ -31,6 +31,6 @@
   },
   "dependencies": {
     "browserify": "11.2.0",
-    "codemirror": "^5.8.0"
+    "codemirror": "5.8.0"
   }
 }
