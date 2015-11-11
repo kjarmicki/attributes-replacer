@@ -1,14 +1,31 @@
 <!doctype html>
 <html>
     <head>
+        <link rel="stylesheet" href="codemirror.css">
+        <link rel="stylesheet" href="popup.css">
     </head>
 
     <body>
-        <input id="switch" type="checkbox">
-        <button id="url">apply rules to url</button>
-        <textarea id="rules"></textarea>
-        <textarea id="selectors"></textarea>
+        <div class="wrapper">
+            <h1>HTML Attributes Replacer</h1>
+            <div class="textbox row">
+                <label for="rules">Attribute rewrite rules:</label>
+                <textarea id="rules"></textarea>
+            </div>
 
-        <script src="popup.js"></script>
+            <div class="textbox row">
+                <label for="selectors">Apply to selectors:</label>
+                <textarea id="selectors"></textarea>
+            </div>
+
+            <div class="controls row">
+                <label>Replacing <input class="switch" id="switch" type="checkbox"><div></div></label>
+                <button class="btn" id="url">apply rules to url</button>
+            </div>
+
+            <script src="codemirror.js"></script>
+            <script src="codemirror-mode-simple.js"></script>
+            <script src="popup.js"></script>
+        </div>
     </body>
 </html>

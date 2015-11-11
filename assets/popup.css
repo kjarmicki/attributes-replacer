@@ -1,0 +1,169 @@
+/*
+ * palette: https://color.adobe.com/create/color-wheel/?base=2&rule=Complementary&selected=0&name=My%20Color%20Theme&mode=rgb&rgbvalues=0.7,0.3342490756954021,0,1,0.5297488116083742,0.09999999999999998,1,0.47749867956486014,0,0,0.5635104398475277,0.7,0,0.8050149140678968,1&swatchOrder=0,1,2,3,4
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 0.9em;
+    color: #555;
+}
+
+h1 {
+    font-size: 1.5em;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wrapper {
+    box-sizing: border-box;
+    padding: 5px 10px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.row {
+    margin: 0 0 20px 0;
+}
+
+.textbox label {
+    margin-bottom: 5px;
+    display: block;
+}
+
+.textbox textarea {
+    width: 100%;
+}
+
+#rules {
+    height: 75px;
+}
+
+#selectors {
+    height: 61px;
+}
+
+.btn {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 0 14px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #999;
+    font-weight: bold;
+    height: 23px;
+}
+
+.btn:hover {
+    color: #00657d;
+}
+
+.btn:focus {
+    outline: 0;
+    color: #ff8719;
+}
+
+.switch + div {
+    cursor: pointer;
+}
+
+/* checkbox switcher, ripped off from http://lea.verou.me/2013/03/ios-6-switch-style-checkboxes-with-pure-css/ */
+
+input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+input[type="checkbox"].switch + div {
+    display: inline-block;
+    vertical-align: middle;
+    width: 3em;
+    height: 1em;
+    border: 1px solid #ddd;
+    border-radius: 999px;
+    margin: 0 .5em;
+    background: #fff;
+    background-color: #fff;
+    overflow: hidden;
+    font-size: 150%;
+}
+
+input[type="checkbox"].switch:checked + div {
+    padding-left: 2em;  width: 1em;
+    background-position: 0 0;
+}
+
+input[type="checkbox"].switch + div:before {
+    content: 'On';
+    float: left;
+    width: 1.65em; height: 1.65em;
+    margin: -.1em;
+    border: 1px solid #ddd;
+    border-radius: inherit;
+    background: #f7f7f7;
+    color: #ff8719;
+    text-indent: -2.5em;
+}
+
+input[type="checkbox"].switch:checked + div:before {
+    background: #ff8719;
+}
+
+input[type="checkbox"].switch:active + div:before {
+    background-color: #eee;
+}
+
+input[type="checkbox"].switch + div:before,
+input[type="checkbox"].switch + div:after {
+    font: bold 60%/1.9 sans-serif;
+    text-transform: uppercase;
+}
+
+input[type="checkbox"].switch + div:after {
+    content: 'Off';
+    float: left;
+    text-indent: .5em;
+    color: #999;
+    text-shadow: none;
+}
+
+input[type="checkbox"].switch + div:hover:after {
+    color: #00657d;
+}
+
+/* codemirror */
+
+.CodeMirror {
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    cursor: text;
+}
+
+.CodeMirror-lines {
+    cursor: default;
+}
+
+.CodeMirror.cm-s-disabled {
+    -webkit-filter: grayscale(1);
+    background-color: #fcfcfc;
+    cursor: default;
+}
+
+.CodeMirror .cm-comment {
+    color: #7a3a00;
+}
+
+.CodeMirror .cm-operator {
+    color: #ff8719;
+}
+
+.CodeMirror .cm-variable-1 {
+    color: #00657d;
+}

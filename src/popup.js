@@ -5,7 +5,8 @@ let messenger = require('./messenger'),
     rulesElement = document.querySelector('#rules'),
     selectorsElement = document.querySelector('#selectors'),
     switchElement = document.querySelector('#switch'),
-    urlElement = document.querySelector('#url');
+    urlElement = document.querySelector('#url'),
+    rulesEditor, selectorsEditor;
 
 let switchOn = function() {
     messenger.sendToExtension('background', {
@@ -19,15 +20,17 @@ let switchOff = function() {
     });
 };
 
-let disableTextFields = function() {
-    [rulesElement, selectorsElement].forEach(input => {
-        input.setAttribute('disabled', 'disabled');
+let disableEditors = function() {
+    [rulesEditor, selectorsEditor].forEach(editor => {
+        editor.setOption('readOnly', 'nocursor');
+        editor.setOption('theme', 'disabled');
     });
 };
 
-let enableTextFields = function() {
-    [rulesElement, selectorsElement].forEach(input => {
-        input.removeAttribute('disabled');
+let enableEditors = function() {
+    [rulesEditor, selectorsEditor].forEach(editor => {
+        editor.setOption('readOnly', false);
+        editor.setOption('theme', 'default');
     });
 };
 
@@ -47,15 +50,47 @@ let loadValueAsync = function(key) {
     });
 };
 
+// code mirror modes
+CodeMirror.defineSimpleMode('rules', {
+    start: [
+        { regex: /\=\>/, token: 'operator' }, // => separator
+        { regex: /\/\/.*/, token: 'comment', sol: true },
+        { regex: /.(?!\=\>)+/, token: 'variable-1' } // any left or right hand side rule
+    ]
+});
+
+CodeMirror.defineSimpleMode('selectors', {
+    start: [
+        { regex: /(\.|\#){1}[a-zA-Z0-9\-]+/, token: 'variable-1' }, // id or class
+        { regex: /[a-zA-Z0-9]+/, token: 'variable-1' }, // element
+        { regex: /:[0-9a-z\-\(\)]+/, token: 'variable-2' }, // pseudoselector
+        { regex: /\[[0-9a-z]+\]/, token: 'operator' }, // attribute selector
+        { regex: /\/\/.*/, token: 'comment', sol: true }
+    ]
+});
+
+// code mirror editors
+rulesEditor = CodeMirror.fromTextArea(rulesElement, {
+    mode: 'rules',
+    lineNumbers: true
+});
+rulesEditor.setSize('100%', '80');
+
+selectorsEditor = CodeMirror.fromTextArea(selectorsElement, {
+    mode: 'selectors',
+    lineNumbers: true
+});
+selectorsEditor.setSize('100%', '66');
+
 // main logic
 switchElement.addEventListener('change', event => {
     if(switchElement.checked) {
         switchOn();
-        disableTextFields();
+        disableEditors();
     }
     else {
         switchOff();
-        enableTextFields();
+        enableEditors();
     }
 });
 
@@ -63,12 +98,12 @@ switchElement.addEventListener('change', event => {
 // initialization/persistence stuff
 
 // persist element values when they change
-rulesElement.addEventListener('change', event => {
-    persistValueAsync('rules', rulesElement.value);
+rulesEditor.on('change', event => {
+    persistValueAsync('rules', rulesEditor.getValue());
 });
 
-selectorsElement.addEventListener('change', event => {
-    persistValueAsync('selectors', selectorsElement.value);
+selectorsEditor.on('change', event => {
+    persistValueAsync('selectors', selectorsEditor.getValue());
 });
 
 switchElement.addEventListener('change', event => {
@@ -88,14 +123,14 @@ urlElement.addEventListener('click', event => {
 messenger.listen('popup', message => {
     if(message.action === 'load') {
         if(message.key === 'selectors') {
-            selectorsElement.value = message.value;
+            selectorsEditor.setValue(message.value);
         }
         if(message.key === 'rules') {
-            rulesElement.value = message.value;
+            rulesEditor.setValue(message.value);
         }
         if(message.key === 'switch' && message.value === 'true') {
             switchElement.setAttribute('checked', 'checked');
-            disableTextFields();
+            disableEditors();
         }
     }
 });
