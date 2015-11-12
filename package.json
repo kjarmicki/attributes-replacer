@@ -23,7 +23,7 @@
   "author": "Krystian Jarmicki",
   "license": "MIT",
   "devDependencies": {
-    "hiff": "0.2.1",
+    "hiff": "^0.2.1",
     "karma": "0.13.11",
     "karma-browserify": "4.4.0",
     "karma-chrome-launcher": "0.2.1",

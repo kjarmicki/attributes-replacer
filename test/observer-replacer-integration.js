@@ -5,7 +5,7 @@ let observer = require('../src/observer.js');
 let replacer = require('../src/replacer.js');
 let sandbox = require('./utils/sandbox');
 
-describe('An observer', () => {
+describe('A replacer combined with observer', () => {
 
     beforeEach(sandbox.refresh);
 
