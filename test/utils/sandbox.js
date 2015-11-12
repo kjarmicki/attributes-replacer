@@ -1,5 +1,7 @@
 'use strict';
 
+let hiff = require('hiff');
+
 const id = 'sandbox';
 let element;
 
@@ -25,5 +27,8 @@ module.exports = {
     find: function(selector) {
         let found = document.querySelectorAll(selector);
         return found.length === 1 ? found[0] : found;
+    },
+    contentEquals(html) {
+        return !hiff.diff(this.getHTML(), html);
     }
 };

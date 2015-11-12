@@ -4,8 +4,10 @@ let utils = require('./utils');
 
 let revert = function(elements, attributeName) {
     elements.forEach(element => {
-        if(element[`__original_attribute_${attributeName}__`] !== undefined) {
-            element.setAttribute(attributeName, element[`__original_attribute_${attributeName}__`]);
+        let mark = `__original_attribute_${attributeName}__`;
+        if(element[mark] !== undefined) {
+            element.setAttribute(attributeName, element[mark]);
+            delete element[mark];
         }
     });
 };

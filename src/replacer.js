@@ -8,6 +8,8 @@ let utils = require('./utils');
 
 let replace = function(elements, attributeName, rules) {
     elements.forEach(element => {
+        if(element[`__original_attribute_${attributeName}__`]) return; // attribute already changed, move along
+
         let attributeValue = element.getAttribute(attributeName);
         if(attributeValue) {
             (rules || []).some(rule => {

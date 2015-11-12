@@ -47,10 +47,10 @@ describe('A replacer', () => {
         }]);
 
         // then
-        assert.equal(sandbox.getHTML().trim(), `
+        assert.ok(sandbox.contentEquals(`
                 <a href="http://goodbye-cruel-world.com">Hello World!</a>
                 <a href="http://goodbye-cruel-world.com/about">About Hello World!</a>
-        `.trim());
+        `));
 
     });
 

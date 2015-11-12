@@ -10,7 +10,8 @@ let controls = {
         replacer.replaceBySelectors(args.selectors, args.rules);
         observer.observe(changedNodes => {
             changedNodes.forEach(subtree => {
-                replacer.replaceBySelectors(args.selectors, args.rules, subtree);
+                replacer.replaceBySelectors(args.selectors, args.rules,
+                    subtree.parentNode ? subtree.parentNode : subtree);
             });
         });
     },
