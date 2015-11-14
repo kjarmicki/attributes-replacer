@@ -2,10 +2,9 @@
   "name": "attr-replacer",
   "version": "1.0.0",
   "description": "Chrome extension allowing for easy replacement of HTML attribute values.",
-  "main": "index.js",
   "scripts": {
     "test": "karma start",
-    "manifest": "node index.js",
+    "manifest": "node create-manifest.js",
     "contentscript": "browserify src/content-script.js -o dist/content-script.js",
     "codemirror_js": "cp node_modules/codemirror/lib/codemirror.js dist/. && cp node_modules/codemirror/addon/mode/simple.js dist/codemirror-mode-simple.js",
     "codemirror_css": "cp node_modules/codemirror/lib/codemirror.css dist/.",
