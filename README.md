@@ -1,10 +1,12 @@
 # Overview
 
-This project builds Attribute Replacer extension for Google Chrome.
+This project builds Attributes Replacer extension for Google Chrome.
 
 # Installation and running
 
-Requirements: [Node.js](https://nodejs.org) in version 4.0 or higher.
+Requirements:
+* [Node.js](https://nodejs.org) in version 4.0 or higher.
+* sh-compatible shell
 
 ```
 npm install

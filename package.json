@@ -1,7 +1,7 @@
 {
-  "name": "Attribute-Replacer",
+  "name": "Attributes-Replacer",
   "version": "1.0.0",
-  "description": "Chrome extension allowing for easy replacement of HTML attribute values.",
+  "description": "Chrome extension allowing for easy replacement of HTML attributes' values.",
   "scripts": {
     "test": "karma start",
     "clean": "rm -rf dist/*",
@@ -21,13 +21,13 @@
     "element",
     "link",
     "url",
-    "replacer"
+    "replace"
   ],
   "author": "Krystian Jarmicki",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kjarmicki/attribute-replacer"
+    "url": "https://github.com/kjarmicki/attributes-replacer"
   },
   "devDependencies": {
     "hiff": "0.2.1",
