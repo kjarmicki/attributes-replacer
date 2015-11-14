@@ -1,5 +1,5 @@
 {
-  "name": "attr-replacer",
+  "name": "Attribute Replacer",
   "version": "1.0.0",
   "description": "Chrome extension allowing for easy replacement of HTML attribute values.",
   "scripts": {
