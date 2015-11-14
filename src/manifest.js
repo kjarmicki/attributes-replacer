@@ -12,8 +12,11 @@ let create = function(overrides) {
         manifest_version: 2,
 
         browser_action: {
-            default_icon: 'temp-icon.png',
+            default_icon: 'icon-128.png',
             default_popup: 'popup.html'
+        },
+        icons: {
+            128: 'icon-128.png'
         },
         content_scripts: [{
             matches: ['<all_urls>'],

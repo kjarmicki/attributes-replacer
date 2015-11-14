@@ -4,6 +4,15 @@ let textParser = require('./text-parser'),
     rulesParser = require('./rules-parser'),
     messenger = require('./messenger');
 
+let icon = {
+    on: function() {
+        chrome.browserAction.setIcon({path: 'icon-128.png'});
+    },
+    off: function() {
+        chrome.browserAction.setIcon({path: 'icon-128-bnw.png'});
+    }
+};
+
 let background = {
     save: function(key, value) {
         localStorage.setItem(key, value);
@@ -14,6 +23,7 @@ let background = {
     on: function() {
         let rawSelectors = background.load('selectors');
         let rawRules = background.load('rules');
+
         messenger.sendToTab('content-script', {
             action: 'on',
             args: {
@@ -21,19 +31,27 @@ let background = {
                 rules: rulesParser.parse(rawRules)
             }
         });
+        icon.on();
     },
     off: function() {
         let rawSelectors = background.load('selectors');
+
         messenger.sendToTab('content-script', {
             action: 'off',
             args: {
                 selectors: textParser.parse(rawSelectors)
             }
         });
+        icon.off();
     },
     init: function() {
         let turnedOn = (background.load('switch') === 'true');
-        if(turnedOn) background.on();
+        if(turnedOn) {
+            background.on();
+        }
+        else {
+            icon.off();
+        }
     },
     url: function() {
         let rawRules = background.load('rules');
