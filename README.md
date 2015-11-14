@@ -1,6 +1,6 @@
 # Overview
 
-This project builds Attributes Replacer extension for Google Chrome.
+This project builds [Attributes Replacer extension](https://chrome.google.com/webstore/detail/attributes-replacer/blchhkbbijehipelagipdngfhiolahko) for Google Chrome.
 
 # Installation and running
 
