@@ -11,8 +11,9 @@
     "popup": "browserify src/popup.js -o dist/popup.js && cp assets/popup.html dist/. && cp assets/popup.css dist/.",
     "background": "browserify src/background.js -o dist/background.js",
     "icon": "cp assets/icon-128.png dist/. && cp assets/icon-128-bnw.png dist/.",
-    "make": "npm run manifest && npm run contentscript && npm run codemirror_js && npm run codemirror_css && npm run popup && npm run background && npm run icon",
-    "start": "npm run make"
+    "dist": "npm run manifest && npm run contentscript && npm run codemirror_js && npm run codemirror_css && npm run popup && npm run background && npm run icon",
+    "zip": "npm run dist && node create-zip.js",
+    "start": "npm run zip"
   },
   "keywords": [
     "link",
@@ -30,6 +31,7 @@
     "mocha": "2.3.3"
   },
   "dependencies": {
+    "archiver": "0.16.0",
     "browserify": "11.2.0",
     "codemirror": "5.8.0"
   }
