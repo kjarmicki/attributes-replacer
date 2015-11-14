@@ -20,6 +20,9 @@ let background = {
     load: function(key) {
         return localStorage.getItem(key);
     },
+    isEmpty: function() {
+        return localStorage.length === 0;
+    },
     on: function() {
         let rawSelectors = background.load('selectors');
         let rawRules = background.load('rules');
@@ -63,6 +66,14 @@ let background = {
         });
     }
 };
+
+if(background.isEmpty()) {
+    background.save('rules', `// place your regexp replacement rules here
+http://example.com => http://different.com`);
+
+    background.save('selectors', `// place your attribute selectors here
+a[href]`);
+}
 
 messenger.listen('background', message => {
     if(message.action === 'save') {
