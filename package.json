@@ -1,9 +1,10 @@
 {
-  "name": "Attribute Replacer",
+  "name": "Attribute-Replacer",
   "version": "1.0.0",
   "description": "Chrome extension allowing for easy replacement of HTML attribute values.",
   "scripts": {
     "test": "karma start",
+    "clean": "rm -rf dist/*",
     "manifest": "node create-manifest.js",
     "contentscript": "browserify src/content-script.js -o dist/content-script.js",
     "codemirror_js": "cp node_modules/codemirror/lib/codemirror.js dist/. && cp node_modules/codemirror/addon/mode/simple.js dist/codemirror-mode-simple.js",
@@ -11,7 +12,7 @@
     "popup": "browserify src/popup.js -o dist/popup.js && cp assets/popup.html dist/. && cp assets/popup.css dist/.",
     "background": "browserify src/background.js -o dist/background.js",
     "icon": "cp assets/icon-128.png dist/. && cp assets/icon-128-bnw.png dist/.",
-    "dist": "npm run manifest && npm run contentscript && npm run codemirror_js && npm run codemirror_css && npm run popup && npm run background && npm run icon",
+    "dist": "npm run clean && npm run manifest && npm run contentscript && npm run codemirror_js && npm run codemirror_css && npm run popup && npm run background && npm run icon",
     "zip": "npm run dist && node create-zip.js",
     "start": "npm run zip"
   },
