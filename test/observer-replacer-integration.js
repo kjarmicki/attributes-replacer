@@ -1,8 +1,8 @@
 'use strict';
 
 let assert = require('assert');
-let observer = require('../src/observer.js');
-let replacer = require('../src/replacer.js');
+let observer = require('../src/observer');
+let replacer = require('../src/replacer');
 let sandbox = require('./utils/sandbox');
 
 describe('A replacer combined with observer', () => {

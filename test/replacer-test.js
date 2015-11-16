@@ -1,7 +1,7 @@
 'use strict';
 
 let assert = require('assert');
-let replacer = require('../src/replacer.js');
+let replacer = require('../src/replacer');
 let sandbox = require('./utils/sandbox');
 
 describe('A replacer', () => {

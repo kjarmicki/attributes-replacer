@@ -2,7 +2,8 @@
 
 let textParser = require('./text-parser'),
     rulesParser = require('./rules-parser'),
-    messenger = require('./messenger');
+    messenger = require('./messenger'),
+    storage = require('./storage')(chrome.storage.sync, chrome.runtime);
 
 let icon = {
     on: function() {
@@ -14,77 +15,72 @@ let icon = {
 };
 
 let background = {
-    save: function(key, value) {
-        localStorage.setItem(key, value);
-    },
-    load: function(key) {
-        return localStorage.getItem(key);
-    },
-    isEmpty: function() {
-        return localStorage.length === 0;
-    },
     on: function() {
-        let rawSelectors = background.load('selectors');
-        let rawRules = background.load('rules');
+        Promise.all([storage.get('selectors'), storage.get('rules')])
+            .then((results) => {
+                messenger.sendToTab('content-script', {
+                    action: 'on',
+                    args: {
+                        selectors: textParser.parse(results[0]),
+                        rules: rulesParser.parse(results[1])
+                    }
+                });
+                icon.on();
+            });
 
-        messenger.sendToTab('content-script', {
-            action: 'on',
-            args: {
-                selectors: textParser.parse(rawSelectors),
-                rules: rulesParser.parse(rawRules)
-            }
-        });
-        icon.on();
     },
     off: function() {
-        let rawSelectors = background.load('selectors');
-
-        messenger.sendToTab('content-script', {
-            action: 'off',
-            args: {
-                selectors: textParser.parse(rawSelectors)
-            }
+        storage.get('selectors').then(rawSelectors => {
+            messenger.sendToTab('content-script', {
+                action: 'off',
+                args: {
+                    selectors: textParser.parse(rawSelectors)
+                }
+            });
+            icon.off();
         });
-        icon.off();
+
     },
     init: function() {
-        let turnedOn = (background.load('switch') === 'true');
-        if(turnedOn) {
-            background.on();
-        }
-        else {
-            icon.off();
-        }
-    },
-    url: function() {
-        let rawRules = background.load('rules');
-        messenger.sendToTab('content-script', {
-            action: 'url',
-            args: {
-                rules: rulesParser.parse(rawRules)
+        storage.get('switch').then(turnedOn => {
+            if(turnedOn === 'true') {
+                background.on();
+            } else {
+                icon.off();
             }
         });
+    },
+    url: function() {
+       storage.get('rules').then(rawRules => {
+           messenger.sendToTab('content-script', {
+               action: 'url',
+               args: {
+                   rules: rulesParser.parse(rawRules)
+               }
+           });
+       });
     }
 };
 
-if(background.isEmpty()) {
-    background.save('rules', `// place your regexp replacement rules here
+if(storage.isEmpty()) {
+    storage.set('rules', `// place your regexp replacement rules here
 http://example.com => http://different.com`);
 
-    background.save('selectors', `// place your attribute selectors here
+    storage.set('selectors', `// place your attribute selectors here
 a[href]`);
 }
 
 messenger.listen('background', message => {
     if(message.action === 'save') {
-        background.save(message.key, message.value);
+        storage.set(message.key, message.value);
     }
     else if(message.action === 'load') {
-        let value = background.load(message.key);
-        messenger.sendToExtension(message.from, {
-            action: 'load',
-            key: message.key,
-            value: value
+        storage.get(message.key).then(value => {
+            messenger.sendToExtension(message.from, {
+                action: 'load',
+                key: message.key,
+                value: value
+            });
         });
     }
     else if(typeof background[message.action] === 'function') {

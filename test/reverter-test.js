@@ -1,7 +1,7 @@
 'use strict';
 
 let assert = require('assert');
-let reverter = require('../src/reverter.js');
+let reverter = require('../src/reverter');
 let sandbox = require('./utils/sandbox');
 
 describe('A reverter', () => {

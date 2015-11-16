@@ -18,6 +18,9 @@ let create = function(overrides) {
         icons: {
             128: 'icon-128.png'
         },
+        permissions: [
+            'storage'
+        ],
         content_scripts: [{
             matches: ['<all_urls>'],
             js: ['content-script.js']

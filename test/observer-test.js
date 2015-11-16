@@ -1,7 +1,7 @@
 'use strict';
 
 let assert = require('assert');
-let observer = require('../src/observer.js');
+let observer = require('../src/observer');
 let sandbox = require('./utils/sandbox');
 
 describe('An observer', () => {

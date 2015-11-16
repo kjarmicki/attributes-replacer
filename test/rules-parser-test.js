@@ -1,7 +1,7 @@
 'use strict';
 
 let assert = require('assert');
-let parser = require('../src/rules-parser.js');
+let parser = require('../src/rules-parser');
 
 describe('A rules parser', () => {
 
