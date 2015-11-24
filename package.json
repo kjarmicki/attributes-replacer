@@ -41,5 +41,8 @@
     "archiver": "0.16.0",
     "browserify": "11.2.0",
     "codemirror": "5.8.0"
+  },
+  "engines": {
+    "node": ">=4.2.0"
   }
 }

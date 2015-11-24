@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    extractAttributeFromSelector: function(selector) {
+    extractAttributeFromSelector(selector) {
         try {
             return selector.match(/\[([a-z]+)\]/)[1];
         }

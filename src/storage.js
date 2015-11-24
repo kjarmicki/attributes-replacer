@@ -2,7 +2,7 @@
 
 let makeStorage = function(engine, runtime) {
     return {
-        get: function(key) {
+        get(key) {
             return new Promise((resolve, reject) => {
                 engine.get(key, result => {
                     if(runtime && runtime.lastError) return reject(runtime.lastError);
@@ -10,7 +10,7 @@ let makeStorage = function(engine, runtime) {
                 });
             });
         },
-        set: function(key, value) {
+        set(key, value) {
             return new Promise((resolve, reject) => {
                 engine.set({[key]: value}, result => {
                     if(runtime && runtime.lastError) return reject(runtime.lastError);
@@ -18,7 +18,7 @@ let makeStorage = function(engine, runtime) {
                 });
             });
         },
-        isEmpty: function() {
+        isEmpty() {
             return new Promise((resolve, reject) => {
                 engine.getBytesInUse(null, result => {
                     if(runtime && runtime.lastError) return reject(runtime.lastError);

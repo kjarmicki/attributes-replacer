@@ -6,7 +6,7 @@ let replacer = require('./replacer'),
     messenger = require('./messenger');
 
 let controls = {
-    on: function(args) {
+    on(args) {
         replacer.replaceBySelectors(args.selectors, args.rules);
         observer.observe(changedNodes => {
             changedNodes.forEach(subtree => {
@@ -15,11 +15,11 @@ let controls = {
             });
         });
     },
-    off: function(args) {
+    off(args) {
         reverter.revertBySelectors(args.selectors);
         observer.pause();
     },
-    url: function(args) {
+    url(args) {
         let current = window.location.href,
             replaced = replacer.replaceString(current, args.rules);
 

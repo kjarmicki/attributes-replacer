@@ -6,16 +6,16 @@ let textParser = require('./text-parser'),
     storage = require('./storage')(chrome.storage.sync, chrome.runtime);
 
 let icon = {
-    on: function() {
+    on() {
         chrome.browserAction.setIcon({path: 'icon-128.png'});
     },
-    off: function() {
+    off() {
         chrome.browserAction.setIcon({path: 'icon-128-bnw.png'});
     }
 };
 
 let background = {
-    on: function() {
+    on() {
         Promise.all([storage.get('selectors'), storage.get('rules')])
             .then((results) => {
                 messenger.sendToTab('content-script', {
@@ -29,7 +29,7 @@ let background = {
             });
 
     },
-    off: function() {
+    off() {
         storage.get('selectors').then(rawSelectors => {
             messenger.sendToTab('content-script', {
                 action: 'off',
@@ -41,7 +41,7 @@ let background = {
         });
 
     },
-    init: function() {
+    init() {
         storage.get('switch').then(turnedOn => {
             if(turnedOn === 'true') {
                 background.on();
@@ -50,7 +50,7 @@ let background = {
             }
         });
     },
-    url: function() {
+    url() {
        storage.get('rules').then(rawRules => {
            messenger.sendToTab('content-script', {
                action: 'url',
