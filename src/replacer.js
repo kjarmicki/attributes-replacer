@@ -38,7 +38,7 @@ let replaceBySelectors = function(selectors, rules, subtree) {
     selectors
         .reduce((replacements, selector) => {
             replacements.push({
-                elements: [].slice.call(subtree.querySelectorAll(selector)),
+                elements: Array.from(subtree.querySelectorAll(selector)),
                 attributeName: utils.extractAttributeFromSelector(selector)
             });
             return replacements;

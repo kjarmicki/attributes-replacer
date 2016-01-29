@@ -16,7 +16,7 @@ let revertBySelectors = function(selectors) {
     selectors
         .reduce((reverts, selector) => {
             reverts.push({
-                elements: [].slice.call(document.querySelectorAll(selector)),
+                elements: Array.from(document.querySelectorAll(selector)),
                 attributeName: utils.extractAttributeFromSelector(selector)
             });
             return reverts;

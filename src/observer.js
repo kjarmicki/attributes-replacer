@@ -6,7 +6,7 @@ const mutationObserver = new MutationObserver(mutations => {
     if(typeof action === 'function') {
         let nestedElements = mutations
             .filter(mutation => mutation.type === 'childList')
-            .map(mutation => [].slice.call(mutation.addedNodes));
+            .map(mutation => Array.from(mutation.addedNodes));
 
         let elements = [].concat.apply([], nestedElements)
             .filter(element => element.nodeType === Node.ELEMENT_NODE);
