@@ -62,13 +62,15 @@ let background = {
     }
 };
 
-if(storage.isEmpty()) {
-    storage.set('rules', `// place your regexp replacement rules here
+storage.isEmpty().then((empty) => {
+    if(empty) {
+        storage.set('rules', `// place your regexp replacement rules here
 http://example.com => http://different.com`);
 
-    storage.set('selectors', `// place your attribute selectors here
+        storage.set('selectors', `// place your attribute selectors here
 a[href]`);
-}
+    }
+});
 
 messenger.listen('background', message => {
     if(message.action === 'save') {

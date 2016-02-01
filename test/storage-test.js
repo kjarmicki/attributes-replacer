@@ -39,4 +39,34 @@ describe('A storage', () => {
              done();
          });
      });
+
+    it('should return proper value when storage is empty', done => {
+        // given
+        let engine = ame();
+        let memoryStorage = storage(engine);
+
+        // when
+        memoryStorage.isEmpty()
+            // then
+            .then(empty => {
+                assert.ok(empty);
+                done();
+            });
+    });
+
+    it('should return proper value when storage is not empty', done => {
+        // given
+        let engine = ame();
+        let memoryStorage = storage(engine);
+
+        memoryStorage.set('hello', 'world')
+            // when
+            .then(() => memoryStorage.isEmpty())
+
+            // then
+            .then(empty => {
+                assert.ok(!empty);
+                done();
+            });
+    });
 });

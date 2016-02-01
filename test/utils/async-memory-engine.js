@@ -17,6 +17,11 @@ let ams = function(initial) {
         },
         dump: function() {
             return Object.assign({}, memo);
+        },
+        getBytesInUse: function(keys, callback) {
+            setTimeout(() => {
+                callback(Object.getOwnPropertyNames(memo).length);
+            }, 1);
         }
     };
 };
