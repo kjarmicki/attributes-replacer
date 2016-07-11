@@ -18,7 +18,7 @@ let background = {
     on() {
         Promise.all([storage.get('selectors'), storage.get('rules')])
             .then((results) => {
-                messenger.sendToTab('content-script', {
+                messenger.sendToTabs('content-script', {
                     action: 'on',
                     args: {
                         selectors: textParser.parse(results[0]),
@@ -31,7 +31,7 @@ let background = {
     },
     off() {
         storage.get('selectors').then(rawSelectors => {
-            messenger.sendToTab('content-script', {
+            messenger.sendToTabs('content-script', {
                 action: 'off',
                 args: {
                     selectors: textParser.parse(rawSelectors)
@@ -52,7 +52,7 @@ let background = {
     },
     url() {
        storage.get('rules').then(rawRules => {
-           messenger.sendToTab('content-script', {
+           messenger.sendToTabs('content-script', {
                action: 'url',
                args: {
                    rules: rulesParser.parse(rawRules)
