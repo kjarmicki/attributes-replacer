@@ -1,5 +1,8 @@
 # Attributes Replacer
 
+## About this repo
+
+This project builds [Attributes Replacer extension](https://chrome.google.com/webstore/detail/attributes-replacer/blchhkbbijehipelagipdngfhiolahko) for Google Chrome.
 
 ## How does this extension work?
 
@@ -47,6 +50,7 @@ Yes, just separate them with new lines.
 ### Can I replace some set of attributes in one page and different in another?
 Nope, at least not yet. The approach is currently "select all the attributes that match selectors and apply first matching rule".
 
+___
 
 #### For development: Installation and running
 
