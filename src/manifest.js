@@ -23,7 +23,8 @@ let create = function(overrides) {
         ],
         content_scripts: [{
             matches: ['<all_urls>'],
-            js: ['content-script.js']
+            js: ['content-script.js'],
+            all_frames: true
         }],
         background: {
             scripts: ['background.js']

@@ -5,6 +5,14 @@ let replacer = require('./replacer'),
     observer = require('./observer'),
     messenger = require('./messenger');
 
+function insideTopWindow() {
+    try {
+        return window === window.top;
+    } catch(e) {
+        return false;
+    }
+}
+
 let controls = {
     on(args) {
         replacer.replaceBySelectors(args.selectors, args.rules);
@@ -35,6 +43,8 @@ messenger.listen('content-script', message => {
     }
 });
 
-messenger.sendToExtension('background', {
-    action: 'init'
-});
+if(insideTopWindow()) {
+    messenger.sendToExtension('background', {
+        action: 'init'
+    });
+}
