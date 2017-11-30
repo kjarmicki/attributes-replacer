@@ -63,8 +63,8 @@ CodeMirror.defineSimpleMode('selectors', {
     start: [
         { regex: /(\.|\#){1}[a-zA-Z0-9\-]+/, token: 'variable-1' }, // id or class
         { regex: /[a-zA-Z0-9]+/, token: 'variable-1' }, // element
-        { regex: /:[0-9a-z\-\(\)]+/, token: 'variable-2' }, // pseudoselector
-        { regex: /\[[0-9a-z]+\]/, token: 'operator' }, // attribute selector
+        { regex: /:[a-zA-Z0-9\-\(\)]+/, token: 'variable-2' }, // pseudoselector
+        { regex: /\[[a-zA-Z0-9\-]+\]/, token: 'operator' }, // attribute selector
         { regex: /\/\/.*/, token: 'comment', sol: true }
     ]
 });
