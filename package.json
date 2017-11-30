@@ -1,6 +1,6 @@
 {
   "name": "Attributes-Replacer",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Chrome extension allowing for easy replacement of HTML attributes' values.",
   "scripts": {
     "test": "karma start",
